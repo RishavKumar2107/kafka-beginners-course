@@ -152,7 +152,8 @@ public class OpenSearchConsumer {
                                 .id(id);
 
 //                        IndexResponse response = openSearchClient.index(indexRequest, RequestOptions.DEFAULT);
-
+                        // instead of sending one record at a time, we will batch
+                        //the request 
                         bulkRequest.add(indexRequest);
 
 //                        log.info(response.getId());
@@ -162,7 +163,9 @@ public class OpenSearchConsumer {
 
                 }
 
-
+                // here we check if there is any message in the batch , if >0  then send the bulk request and sleep for 1 second
+                // also now manually commit auto offset 
+                // we are improving the performance of sending to openSearch with these techniques
                 if (bulkRequest.numberOfActions() > 0){
                     BulkResponse bulkResponse = openSearchClient.bulk(bulkRequest, RequestOptions.DEFAULT);
                     log.info("Inserted " + bulkResponse.getItems().length + " record(s).");
