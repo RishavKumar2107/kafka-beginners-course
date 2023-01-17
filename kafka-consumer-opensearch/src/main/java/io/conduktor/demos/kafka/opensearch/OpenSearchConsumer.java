@@ -135,7 +135,9 @@ public class OpenSearchConsumer {
                 for (ConsumerRecord<String, String> record : records) {
 
                     // send the record into OpenSearch
-
+                       
+                    // Idempotent Consumer
+                    // meaning : No duplicate data send to opensearch
                     // strategy 1
                     // define an ID using Kafka Record coordinates
 //                    String id = record.topic() + "_" + record.partition() + "_" + record.offset();
