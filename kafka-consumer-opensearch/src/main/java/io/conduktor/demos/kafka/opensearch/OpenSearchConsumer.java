@@ -124,7 +124,7 @@ public class OpenSearchConsumer {
 
 
             while(true) {
-
+                //incase there is no data , block on this line for 3 seconds
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(3000));
 
                 int recordCount = records.count();
