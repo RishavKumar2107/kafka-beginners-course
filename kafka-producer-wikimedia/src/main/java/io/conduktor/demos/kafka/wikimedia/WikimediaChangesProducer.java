@@ -39,6 +39,8 @@ public class WikimediaChangesProducer {
 
         String topic = "wikimedia.recentchange";
 
+        // READ ABOUT EVENT HANDLER
+        // TODO
         EventHandler eventHandler = new WikimediaChangeHandler(producer, topic);
         String url = "https://stream.wikimedia.org/v2/stream/recentchange";
         EventSource.Builder builder = new EventSource.Builder(eventHandler, URI.create(url));
